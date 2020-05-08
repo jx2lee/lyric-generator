@@ -1,12 +1,13 @@
+#!/usr/bin/env python
 from core.prepo import *
 import pickle
 import os
 
-DATA_PATH = './tmp/'
+DATA_PATH = 'tmp/'
 
 if __name__ == "__main__":
 
-    if 'dictionary_word.pkl' in os.listdir(DATA_PATH):
+    if 'dictionary.pkl' in os.listdir(DATA_PATH):
         print('\033[31m \033[43m' + '[INFO]'+ '\033[0m' + ' Dictionary already exited')
         with open(DATA_PATH+'dictionary.pkl', 'rb') as p:
             dictionary = pickle.load(p)
@@ -22,4 +23,5 @@ if __name__ == "__main__":
         pickle.dump(df_train, p)
     with open(DATA_PATH + 'test.pkl', 'wb') as p:
         pickle.dump(df_test, p)
+
     print('\033[31m \033[43m' + '[INFO]'+ '\033[0m' + ' Save model input file')

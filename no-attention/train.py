@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 import pickle
 from core.prepo import *
 from core.model import *
