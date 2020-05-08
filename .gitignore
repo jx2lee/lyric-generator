@@ -1,7 +1,7 @@
 **/*.ipynb
 **/.ipynb_checkpoints
 **/__pycache__/
-res/checkpoint/
-res/*.pkl
-res/*.out
+**/res/checkpoint/
+**/res/*.pkl
+**/res/*.out
 **/.DS_Store
