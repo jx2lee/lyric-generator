@@ -3,14 +3,11 @@ import re
 import numpy as np
 import pandas as pd
 import pickle
-
 from tqdm import tqdm
 from sklearn.model_selection import train_test_split
 
 
 def makeDic(txtpath, dicPath):
-    
-    
     with open(txtpath+'measures.txt', 'r', encoding='utf-8') as f:
         mea = f.read()
 
@@ -21,13 +18,14 @@ def makeDic(txtpath, dicPath):
     mea = mea.replace('\\', '')
     mea = mea.split(' ')
     mea = [word for word in mea if word]
-    print('duplicated measure : {}'.format(len(mea)))
+    print('\033[31m \033[43m' + '[INFO]'+ '\033[0m' + ' Duplicated measure : {}'.format(len(mea)))
     
     unqMea = []
     for word in tqdm(mea):
         if word not in unqMea:
             unqMea.append(word)
-    print('unique measure : {}'.format(len(unqMea)))
+    print('\033[31m \033[43m' + '[INFO]'+ '\033[0m' + ' Create unique measure')
+    print('\033[31m \033[43m' + '[INFO]'+ '\033[0m' + ' Unique measure : {}'.format(len(unqMea)))
 
     wordsCount={}
     for word in mea:
@@ -41,8 +39,9 @@ def makeDic(txtpath, dicPath):
     labelWord = {i+2 : ch[0] for i, ch in enumerate(sortedWordsCount)}
     wordLabel = {y:x for x,y in labelWord.items()}
 
-    with open(dicPath+'dictionary_word.pkl', 'wb') as p:
+    with open(dicPath+'dictionary.pkl', 'wb') as p:
             pickle.dump(labelWord, p)
+            print('\033[31m \033[43m' + '[INFO]'+ '\033[0m' + ' Save dictionary')
 
     return wordLabel
 
@@ -66,8 +65,7 @@ def loadData(label, txtpath):
 
             seqX.append(dt[i])
             seqy.append(dt[i+1])
-    
-    
+
     Xtrain, Xtest, ytrain, ytest = train_test_split(seqX, seqy, test_size = 0.3)
     return Xtrain, Xtest, ytrain, ytest
 
@@ -120,7 +118,7 @@ class Data():
         self.cursor += n
         return res['encX'], res['decX'], res['ency'], res['seqLength']
     
-#padding
+
 class PaddedData(Data):
     def next_batch(self, n):
         if self.cursor+n > self.size:

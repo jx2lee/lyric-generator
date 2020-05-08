@@ -5,5 +5,5 @@ HIDDENUNITS = 256
 BATCH_SIZE = 100
 EPOCHS = 300
 KEEP_PROB = 0.5
-PKL_PATH = './data/'
+PKL_PATH = './tmp/'
 CHECKPOINTS_PATH = './checkpoints'
