@@ -31,7 +31,10 @@ input data*(measures.txt)* is stored inside the `no-attention(or attention)/tmp`
 ### Preperation
 
 Before training model, run `utils.py` to preprocess dataset. For example:  
-`$ python utils.py`  
+```bash
+$ python utils.py
+```  
+
 And set **Hyperparameter** on `o-attention(or attention)/core/var.py` to training model. The following is an example of `var.py`:  
 ```
 # declare parameters
@@ -44,6 +47,7 @@ KEEP_PROB = 0.5
 PKL_PATH = './tmp/'
 CHECKPOINTS_PATH = './checkpoints'
 ```  
+
 > * **VOCAB_SIZE** : Dictionary size
 > * **EMBEDDING_SIZE** : word embedding size
 > * **HIDDENUNITS** : hidden layer unit size
@@ -56,12 +60,16 @@ CHECKPOINTS_PATH = './checkpoints'
 ### Train
 
 Start training the model, run `train.py`. For example:  
-`$ python train.py`
+```bash
+$ python train.py
+```  
 
 ### Test
 
 To test training model, run `test.py`. For example:  
-`$ python test.py`
+```bash
+$ python test.py
+```  
 
 ---
 2019.07.30 made by *jaejun.lee*  
