@@ -1,11 +1,9 @@
-import tensorflow as tf
+from random import randint
 import numpy as np
 import os, timeit
-import pickle
 import pandas as pd
 import pickle
-
-from random import randint
+import tensorflow as tf
 
 def reset_graph():
     if 'sess' in globals() and sess:
@@ -29,7 +27,6 @@ def generator_graph(vocab_size, embedding_size, hidden_units, batch_size, keep_p
 
     # Placeholders
     encoder_inputs = tf.placeholder(shape=(None, None), dtype=tf.int32, name='encoder_inputs')
-    
     decoder_targets = tf.placeholder(shape=(None, None), dtype=tf.int32, name='decoder_targets')
     decoder_inputs = tf.placeholder(shape=(None, None), dtype=tf.int32, name='decoder_inputs')
     keep_prob = tf.placeholder_with_default(1.0, [])
@@ -64,7 +61,6 @@ def generator_graph(vocab_size, embedding_size, hidden_units, batch_size, keep_p
     # Loss
     cross_entropy = tf.nn.softmax_cross_entropy_with_logits(labels=tf.one_hot(decoder_targets, depth=vocab_size, 
                                                             dtype=tf.float32),logits=decoder_logits)
-
     loss = tf.reduce_mean(cross_entropy)
     train_op = tf.train.AdamOptimizer(1e-4).minimize(loss)
     
@@ -84,7 +80,7 @@ def generator_graph(vocab_size, embedding_size, hidden_units, batch_size, keep_p
     }
 
                                     
-def train(graph, tr, te, batch_size, num_epochs, checkpoint_path, pkl_name, learn_time, additional_train=True):
+def train(graph, tr, te, batch_size, num_epochs, checkpoint_path, pkl_name, learning_time_name, additional_train=True):
     
     # additional training
     if additional_train:
@@ -115,7 +111,7 @@ def train(graph, tr, te, batch_size, num_epochs, checkpoint_path, pkl_name, lear
         current_epoch = 0
 
         start_time = timeit.default_timer() # check learning time
-        learningTime = [] # learning time(list)
+        learning_time = []
 
         while current_epoch < num_epochs:
 
@@ -134,13 +130,13 @@ def train(graph, tr, te, batch_size, num_epochs, checkpoint_path, pkl_name, lear
 
                 current_epoch += 1
                 tr_loss_track.append(losses / step)
-                with open('./result/tr_loss_track.pkl', 'wb') as p:
+                with open('res/tr_loss_track.pkl', 'wb') as p:
                     pickle.dump(tr_loss_track, p)
 
                 step, losses = 0, 0
 
                 # model save
-                saver.save(sess, checkpoint_path+'/generator_model.ckpt', global_step=current_epoch)
+                saver.save(sess, checkpoint_path+'generator_model.ckpt', global_step=current_epoch)
 
                 # model test using test_data
                 te_epoch = te.epochs
@@ -153,34 +149,20 @@ def train(graph, tr, te, batch_size, num_epochs, checkpoint_path, pkl_name, lear
                     losses += te_batch_loss
 
                 te_loss_track.append(losses / step)
-                with open('./result/te_loss_track.pkl', 'wb') as p:
+                with open('res/te_loss_track.pkl', 'wb') as p:
                     pickle.dump(te_loss_track, p)
 
                 step, losses = 0, 0
                 print("tr_losses : ", tr_loss_track[-1], "- te_losses : ", te_loss_track[-1])
-
-                '''
-                # early stopping
-                if current_epoch >= 50:
-                    if te_loss_track[-1] - np.mean(te_loss_track[int(round(len(te_loss_track)/2)):]) <= 0.01 :
-                        sess.close()
-                        result_dic = {'tr_losses':tr_loss_track, 'te_losses':te_loss_track}
-                        result_df = pd.DataFrame(result_dic, columns=['tr_losses', 'te_losses'])
-                        # save df
-                        with open('./result'+pkl_name, 'wb') as p:
-                            pickle.dump(result_df, p)
-                        with open('./result'+learn_time, 'wb') as p:
-                            pickle.dump(learningTime, p)
-                        learningTime.append(timeit.default_timer() - start_time)'''
 
     # result.df
     result_dic = {'tr_losses' : tr_loss_track, 'te_losses' : te_loss_track}
     result_df = pd.DataFrame(result_dic, columns=['tr_losses', 'te_losses'])
 
     # save df
-    with open('./result'+pkl_name, 'wb') as p:
+    with open('res' + pkl_name, 'wb') as p:
         pickle.dump(result_df, p)
-    with open('./result'+learn_time, 'wb') as p:
-        pickle.dump(learningTime, p)
+    with open('res'+learning_time_name, 'wb') as p:
+        pickle.dump(learning_time, p)
     
     return result_df

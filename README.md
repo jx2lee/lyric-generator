@@ -34,6 +34,10 @@ Before training model, run `utils.py` to preprocess dataset. For example:
 ```bash
 $ python utils.py
 ```  
+or,  
+```bash
+$ ./uitls.py
+```  
 
 And set **Hyperparameter** on `o-attention(or attention)/core/var.py` to training model. The following is an example of `var.py`:  
 ```
@@ -59,16 +63,26 @@ CHECKPOINTS_PATH = './checkpoints'
 
 ### Train
 
-Start training the model, run `train.py`. For example:  
+Start training the model, run `train.py`. `first` and `next` are the execution factors. `first` is used to start learning the first time, next is used to continue learning. For example:  
 ```bash
-$ python train.py
+$ python train.py first
+$ python train.py next
+```  
+or,  
+```bash
+$ ./train.py first
+$ ./train.py next
 ```  
 
 ### Test
 
-To test training model, run `test.py`. For example:  
+To test training model, run `prediction.py`. For example:  
 ```bash
-$ python test.py
+$ python prediction.py
+```  
+or,  
+```bash
+$ ./prediction.py
 ```  
 
 ---
