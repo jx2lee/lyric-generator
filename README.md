@@ -12,7 +12,7 @@ This repo is for Generating-Farewell-lyric on 'Neural Network' methods. I consis
 
 **Data**:  
 
-input data*(measures.txt)* is stored inside the `no-attention(or attention)/tmp` directory.  
+input data *(measures.txt)* is stored inside the `no-attention(or attention)/tmp` directory.  
 
 **Dataset sizes**: about 11MB. For example:  
 ```
