@@ -65,7 +65,7 @@ CHECKPOINTS_PATH = 'res/checkpoints/'
 
 **Train**:  
 
-Start training the model, run `train.py`. `first` and `next` are the execution factors. `first` is used to start learning the first time, next is used to continue learning. For example:  
+Start training the model, run `train.py`. `first` and `next` are the execution factors. `first` is used to start learning the first time, `next` is used to continue learning. For example:  
 ```bash
 $ python train.py first
 $ python train.py next
