@@ -1,14 +1,16 @@
 # Tensorflow Predict Sentences on Farewell Lyric
 
-## Models
+**Models**:  
 
 This repo is for Generating-Farewell-lyric on 'Neural Network' methods. I consists for 2 different modesl:  
 * Non-Attention (Using [RNN encoder-decoder](https://arxiv.org/abs/1406.1078))
-* Attention
+* Attention (Using [Attention-Based Recurrent Neural Network Models](https://arxiv.org/abs/1609.01454))
 
-## Usage
+## Non-Attention
 
-### Data
+### Usage
+
+**Data**:  
 
 input data*(measures.txt)* is stored inside the `no-attention(or attention)/tmp` directory.  
 
@@ -28,7 +30,7 @@ input data*(measures.txt)* is stored inside the `no-attention(or attention)/tmp`
 ...
 ```
 
-### Preperation
+**Preperation**:  
 
 Before training model, run `utils.py` to preprocess dataset. For example:  
 ```bash
@@ -39,7 +41,7 @@ or,
 $ ./uitls.py
 ```  
 
-And set **Hyperparameter** on `o-attention(or attention)/core/var.py` to training model. The following is an example of `var.py`:  
+And set **Hyperparameter** on `no-attention{attention}/core/var.py` to training model. The following is an example of `var.py`:  
 ```
 # declare parameters
 VOCAB_SIZE = 75762
@@ -48,8 +50,8 @@ HIDDENUNITS = 256
 BATCH_SIZE = 100
 EPOCHS = 300
 KEEP_PROB = 0.5
-PKL_PATH = './tmp/'
-CHECKPOINTS_PATH = './checkpoints'
+PKL_PATH = 'tmp/'
+CHECKPOINTS_PATH = 'res/checkpoints/'
 ```  
 
 > * **VOCAB_SIZE** : Dictionary size
@@ -61,7 +63,7 @@ CHECKPOINTS_PATH = './checkpoints'
 > * **PKL_PATH** : path for output pickle 
 > * **CHECKPOINTS_PATH** : path for model checkpoints
 
-### Train
+**Train**:  
 
 Start training the model, run `train.py`. `first` and `next` are the execution factors. `first` is used to start learning the first time, next is used to continue learning. For example:  
 ```bash
@@ -74,7 +76,7 @@ $ ./train.py first
 $ ./train.py next
 ```  
 
-### Test
+**Test**: 
 
 To test training model, run `prediction.py`. For example:  
 ```bash
@@ -85,6 +87,16 @@ or,
 $ ./prediction.py
 ```  
 
+## Attention
+
+Writing..
+
+### Usage
+
+**Data**:  
+**Preperation**:  
+**Train**:  
+**Test**:  
+
 ---
-2019.07.30 made by *jaejun.lee*  
-update 2020.05.08
+made by *jaejun.lee*  
