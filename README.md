@@ -1,4 +1,4 @@
-# Tensorflow Predict Sentences on Farewell Lyric
+# Predict Sentences on Farewell Lyric using Tensorflow
 
 **Models**:  
 
