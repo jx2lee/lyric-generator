@@ -20,14 +20,14 @@ if __name__ == '__main__':
     g = generator_graph(VOCAB_SIZE, EMBEDDING_SIZE, HIDDENUNITS, BATCH_SIZE, KEEP_PROB) 
     
     # first or nex training
-    train_type = sys.argv[1]
+    try:
+        train_type = sys.argv[1]
+    except:
+        print_error("You Enter the trian mode. ex) train first(or, next)")
+        sys.exit(1)
     if train_type == 'first':
         df = train(g, tr, te, BATCH_SIZE, EPOCHS, CHECKPOINTS_PATH, '/loss.pkl', '/learning_time.pkl', additional_train = False)
         print_info('Training finished')
-
     elif train_type == 'next':
         df = train(g, tr, te, BATCH_SIZE, EPOCHS, CHECKPOINTS_PATH, '/loss.pkl', '/learning_time.pkl', additional_train = True)
         print_info('Training finished')
-
-    else:
-        print_error('You must put "first" or "next"')
