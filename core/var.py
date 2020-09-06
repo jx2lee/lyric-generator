@@ -1,0 +1,9 @@
+# declare parameters
+VOCAB_SIZE = 75762
+EMBEDDING_SIZE = 100
+HIDDENUNITS = 256
+BATCH_SIZE = 100
+EPOCHS = 300
+KEEP_PROB = 0.5
+PKL_PATH = 'tmp/'
+CHECKPOINTS_PATH = 'res/checkpoints/'
