@@ -1,4 +1,3 @@
-# -*- coding:utf-8 -*-
 #!/usr/bin/env python
 from core.generator import *
 from core.model import generator_graph
